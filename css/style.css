@@ -1,0 +1,31 @@
+#pet_smchuncai {opacity:0.85;width:160px;height:160px;position:fixed;top:400px;left:800px;font-size:12px;}
+#pet_chuncaiface {width:160px;height:160px;background-repeat:no-repeat;position:absolute;top:0px;left:0px;}
+#pet_showchuncaimenu {display:none; padding:0px;}
+#pet_tempsaying ul {margin:1px 0px 0px 0px;padding:0px 0px 0px 5px;float:left;width:100%;line-height:16px;cursor:pointer;overflow:hidden;}
+.pet_wcc_mlist {float:left;line-height:16px;margin:0;padding:5px 8px;cursor:pointer; text-align: center; list-style:none;}
+#pet_tempsaying ul {width:96%;}
+#pet_tempsaying img {width:99%; height:98%; margin-bottom: 5px;}
+#pet_tempsaying audio {width:99%; height:98%; margin-bottom: 5px;}
+#pet_callchuncai {position:fixed;width:60px;line-height:16px;cursor:pointer;display:none;font-size:12px;border:1px solid #e87a73;background-color:#FFF;}
+#pet_dialog_chat {position:absolute;top:0px;left:-205px;width:200px;line-height:23px;text-align:left;}
+#pet_dialog_chat_loading {width:200px;height:30px;background:url("../imgs/loading.gif") no-repeat center center;display:none;}
+#pet_chat_top {float:left;width:200px;height:5px;overflow:hidden;background:url("../imgs/chat_top.gif") no-repeat;}
+#pet_dialog_chat_contents, #pet_chuncaisaying, #pet_getmenu, #pet_tempsaying {float:left;margin:0;padding-left:0px;padding-bottom:10px;width:198px;line-height:23px;background-color:#ffffee;}
+#pet_getmenu, #pet_tempsaying,#pet_chuncaisaying {padding:0px 0px 0px 2px; width:196px;}
+#pet_dialog_chat_contents {width:198px;border-left:1px solid #e87a73;border-right:1px solid #e87a73;}
+#pet_chat_bottom {width:200px;height:10px;float:left;background:url("../imgs/chat_bottom.gif") no-repeat;}
+#pet_tempsaying, #pet_hiddenfaces {display:none;padding-bottom:10px;}
+#pet_getmenu {width:50px;height:16px;margin:5px;padding:0;cursor:pointer;  float:right;}
+#pet_close {width:50px;height:16px;margin:5px;padding:0; cursor:pointer;float:left;}
+#pet_carryingGoods {width:50px;height:16px;margin:5px;padding:0; cursor:pointer;float:right;}
+#pet_addinput {width:240px;height:20px;position:absolute;top:150px;left:-260px;border:1px solid #888;background-color:#FFF;padding-top:2px;overflow:hidden;display:none;}
+#pet_inp_l {float:left;width:220px;height:20px;}
+#pet_inp_r {float:right;width:20px;height:20px;font-size:12px;text-align:center;cursor:pointer;}
+#pet_talk {border:none;float:left;width:180px;height:16px;}
+#pet_talkto {float:left;border:none;width:30px;height:16px;background:url("../imgs/ok.jpg");cursor:pointer;}
+#pet_dream {float:left;border:none;width:30px;height:16px;background:url("../imgs/ok.jpg");cursor:pointer; display: none}
+#pet_answer{margin: 10px 0px 0px 2px;padding: 0px;color:#3bbcfb;}
+.pet_package li{margin:5px 5px;float:left;padding:0px 3px; list-style:none;}
+.pet_paging{margin-top: 10px}
+.pet_paging li{float:left;padding:5px; list-style:none; border:1px solid #333; width:10px; height:10px; text-align:center; line-height:10px; margin: 8px;}
+.pet_login{text-align: right; margin: 5px 15px}
