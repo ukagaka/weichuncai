@@ -1,0 +1,141 @@
+<?php
+/**
+ * 剧情任务返回的一些对话
+ *
+ */
+$task = array(
+    'message'=>array(
+        array(
+            'key'=>'sys1',
+            'talk'=>'远处飘来一阵香味~',
+            'expression'=>1,
+            'answer'=>array(
+                array(
+                    'key'=>'cai1',
+                    'name'=>'春菜',
+                    'content'=>'咦，前面有什么香味~',
+                )
+            )
+        ),
+        array(
+            'key'=>'cai1',
+            'talk'=>'说着，春菜，又用鼻子嗅了嗅',
+            'expression'=>1,
+            'answer'=>array(
+                array(
+                    'key'=>'cai2',
+                    'name'=>'你',
+                    'content'=>'哦，前面好像是新开了一个餐厅',
+                ),
+                array(
+                    'key'=>'cai4',
+                    'name'=>'你',
+                    'content'=>'哪有什么味啊，我怎么没看闻到啊',
+                ),
+            )
+        ),
+        array(
+            'key'=>'cai2',
+            'talk'=>'主人~，人家肚肚饿了~ ＞﹏＜',
+            'expression'=>3,
+            'answer'=>array(
+                array(
+                    'key'=>'cai3',
+                    'name'=>'你',
+                    'content'=>'好吧，好吧，真拿你没办法，那我们一起去吃吧',
+                ),
+            )
+        ),
+        array(
+            'key'=>'cai3',
+            'talk'=>'偶也，主人最好了',
+            'expression'=>2,
+            'answer'=>array(
+                array(
+                    'key'=>'sys2',
+                    'name'=>'旁白君',
+                    'content'=>'你们一起走进餐厅',
+                ),
+            )
+        ),
+        array(
+            'key'=>'cai4',
+            'talk'=>'真的，真的有啊，主人陪我一起去看看去吗！',
+            'expression'=>3,
+            'answer'=>array(
+                array(
+                    'key'=>'sys2',
+                    'name'=>'你',
+                    'content'=>'好吧，好吧，我们一起去看看吧',
+                ),
+                array(
+                    'key'=>'cai5',
+                    'name'=>'你',
+                    'content'=>'我现在很忙，那有时间，下次吧',
+                ),
+            )
+        ),
+        array(
+            'key'=>'cai5',
+            'talk'=>'“主人~”，春菜露出可怜兮兮的表情',
+            'expression'=>3,
+            'answer'=>array(
+                array(
+                    'key'=>'end',
+                    'name'=>'旁白君',
+                    'content'=>'结束',
+                ),
+            )
+        ),
+        array(
+            'key'=>'sys2',
+            'talk'=>'欢迎光临，这里是“团子工坊”，现在光临本店，只要对本店做出评价，说出吐槽，会有小礼品相送哦~',
+            'expression'=>0,
+            'answer'=>array(
+                array(
+                    'key'=>'you1',
+                    'name'=>'春菜',
+                    'content'=>'唉啊，还有礼品相送，太好了',
+                ),
+            )
+        ),
+        array(
+            'key'=>'you1',
+            'talk'=>'可是具体要怎么操作呢？',
+            'expression'=>0,
+            'answer'=>array(
+                array(
+                    'key'=>'sys3',
+                    'name'=>'旁白君',
+                    'content'=>'继续',
+                ),
+            )
+        ),
+        array(
+            'key'=>'sys3',
+            'talk'=>'只需要在评论区发表2条评论，再次打开本页面，便会有小礼品相送了',
+            'expression'=>0,
+            'answer'=>array(
+                array(
+                    'key'=>'end',
+                    'name'=>'旁白君',
+                    'content'=>'结束',
+                ),
+            )
+        ),
+    )
+);
+$name = '剧情名称';
+isComplete($name,$task);
+
+function isComplete($name,$task){
+    $uid = 1;
+    /** @var TYPE_NAME $mision=用来判断用户是否已经触发过这个剧情 */
+    $mision = array('uid'=>1,'type'=>1);
+    if(!$mision){
+        echo json_encode(array('code'=>0,'msg'=>$task));
+     }else{
+         $success = '恭喜你，获得了小铜锤!';
+        echo json_encode(array('code'=>1,'msg'=>$success));
+     }
+}
