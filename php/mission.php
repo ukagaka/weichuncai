@@ -130,12 +130,13 @@ isComplete($name,$task);
 
 function isComplete($name,$task){
     $uid = 1;
+    $mision = false;
     /** @var TYPE_NAME $mision=用来判断用户是否已经触发过这个剧情 */
-    $mision = array('uid'=>1,'type'=>1);
-    if(!$mision){
-        echo json_encode(array('code'=>0,'msg'=>$task));
-     }else{
-         $success = '恭喜你，获得了小铜锤!';
+    //$mision = array('uid'=>1,'type'=>1);
+    if($mision){
+        $success = '恭喜你，获得了小铜锤!';
         echo json_encode(array('code'=>1,'msg'=>$success));
+     }else{
+        echo json_encode(array('code'=>0,'msg'=>$task));
      }
 }
