@@ -1,16 +1,8 @@
-var pet_talkobj;
-var pet_talktime = 100000;    //自言自语时间
 var pet_imageWidth;
 var pet_imageheight;
 var pet_name = '';
 var pet_num = 3;
-var pet_typei = 0;      //动态显示文字是记录该显示第几个字符
 var pet_missionState = 0; //剧情状态  0为关闭剧情，1为开启剧情。可以在特定的条件下，通过更改pet_missionState来开启剧情
-var pet_missionData;    //存放剧情对话数据
-var pet_timeNum;
-var pet_tol=0;
-var pet_goal = 10*60;   //多长时间没操作的话停止活动，10分钟后页面没有响应就停止活动
-var pet_typeWords;
 $(document).ready(pet_init());   //通过调用pet_init()来进行初始化伪春菜。
 function pet_init(){
     $.getJSON('../php/getchuncai.php',function(data){
@@ -181,7 +173,7 @@ function pet_init(){
             });
             document.onmousemove = function(){
                 petWCC.pet_stopTime();
-                pet_tol = 0;
+                petWCC.pet_tol = 0;
                 petWCC.pet_setTime();
             }
         }
@@ -190,7 +182,16 @@ function pet_init(){
 
 
 !function($) {
-    var petWCC = function() {}
+    var petWCC = function(){
+        this.pet_talktime = 100000;    //自言自语时间
+        this.pet_timeNum;
+        this.pet_talkobj;
+        this.pet_tol=0;
+        this.pet_goal = 10*60;   //多长时间没操作的话停止活动，10分钟后页面没有响应就停止活动
+        this.pet_typei = 0;      //动态显示文字是记录该显示第几个字符
+        this.pet_missionData;    //存放剧情对话数据
+        this.pet_words;
+    };
     petWCC.prototype = {
         constructor: petWCC,
         /*
@@ -541,21 +542,21 @@ function pet_init(){
             });
         },
         pet_implementMission:function(data){
-            pet_missionData = data;
+            this.pet_missionData = data;
             this.pet_getMission('sys1');
         },
         pet_getMission:function(key){
-            for(var i =0;i < pet_missionData.message.length;i++){
+            for(var i =0;i < this.pet_missionData.message.length;i++){
                 if(key == 'end'){
                     $("#pet_dialog_chat").css("display", "none");
                     $("#pet_chuncaiface").css("display", "block");
-                }else if(key == pet_missionData.message[i]['key']){
-                    mission = pet_missionData.message[i];
+                }else if(key == this.pet_missionData.message[i]['key']){
+                    mission = this.pet_missionData.message[i];
                 }
             }
             $("#pet_dialog_chat_contents").html('<div id="pet_tempsaying" style="display: block;">'+mission.talk+'</div>');
             this.pet_getAnswer(mission.answer);
-            pet_typeWords = mission.talk;
+            this.pet_words = mission.talk;
             this.pet_typeWords();
             if(mission.expression == 0){
                 $("#pet_chuncaiface").css("display", "none");
@@ -579,7 +580,7 @@ function pet_init(){
          |
          | 自言自语为过一段时间自动调用接口，返回随机的一句话
          | 此自言自语为调用一言的API接口。
-         | pet_talktime表示为多长时间执行一次一言
+         | this.pet_talktime表示为多长时间执行一次一言
          |
          */
         pet_talkSelf:function(){
@@ -600,8 +601,8 @@ function pet_init(){
         },
         //停止自言自语
         pet_stopTalkSelf:function(){
-            if(pet_talkobj){
-                clearTimeout(pet_talkobj);  //停止自言自语
+            if(this.pet_talkobj){
+                clearTimeout(this.pet_talkobj);  //停止自言自语
             }
         },
         /*
@@ -614,7 +615,7 @@ function pet_init(){
          */
         //显示伪春菜
         pet_callchuncai:function(){
-            pet_talkobj = window.setTimeout("petWCC.pet_sayHello()", 2000);
+            this.pet_talkobj = window.setTimeout("petWCC.pet_sayHello()", 2000);
             $("#pet_smchuncai").fadeIn('normal');
             $("#pet_callchuncai").css("display", "none");
             this.pet_closeMenu();
@@ -667,9 +668,9 @@ function pet_init(){
          |
          */
         pet_setTime:function(){
-            pet_tol++;
-            pet_timeNum = window.setTimeout("petWCC.pet_setTime('"+pet_tol+"')", 1000);
-            if(parseInt(pet_tol) == parseInt(pet_goal)){
+            this.pet_tol++;
+            this.pet_timeNum = window.setTimeout("petWCC.pet_setTime('"+this.pet_tol+"')", 1000);
+            if(parseInt(this.pet_tol) == parseInt(this.pet_goal)){
                 this.pet_stopTalkSelf();
                 this.pet_closeMenu();
                 this.pet_closeNotice();
@@ -688,18 +689,18 @@ function pet_init(){
          */
         pet_typeWords:function(){
             var p = 1;
-            var str = pet_typeWords.substr(0,pet_typei);
-            var w = pet_typeWords.substr(pet_typei,1);
+            var str = this.pet_words.substr(0,this.pet_typei);
+            var w = this.pet_words.substr(this.pet_typei,1);
             if(w=="<"){
-                str += pet_typeWords.substr(pet_typei,pet_typeWords.substr(pet_typei).indexOf(">")+1);
-                p= pet_typeWords.substr(pet_typei).indexOf(">")+1;
+                str += this.pet_words.substr(this.pet_typei,this.pet_words.substr(this.pet_typei).indexOf(">")+1);
+                p= this.pet_words.substr(this.pet_typei).indexOf(">")+1;
             }
-            pet_typei+=p;
+            this.pet_typei+=p;
             $("#pet_tempsaying").html(str);
             txtst = setTimeout("petWCC.pet_typeWords()",20);
-            if (pet_typei> pet_typeWords.length){
+            if (this.pet_typei> this.pet_words.length){
                 clearTimeout(txtst);
-                pet_typei = 0;
+                this.pet_typei = 0;
             }
         },
         /*
@@ -738,7 +739,7 @@ function pet_init(){
             this.pet_setFace(img);
             $("#pet_dialog_chat").css("display", "block");
             $("#pet_tempsaying").css("display", "block");
-            pet_typeWords = s;
+            this.pet_words = s;
             this.pet_typeWords();
         },
         //清空公告
@@ -777,11 +778,11 @@ function pet_init(){
         },
         //定时更新公告内容
         pet_executionTime:function(){
-            pet_talkobj = window.setTimeout("petWCC.pet_sayHello()", pet_talktime);
+            this.pet_talkobj = window.setTimeout("petWCC.pet_sayHello()", this.pet_talktime);
         },
         pet_stopTime:function(){
-            if(pet_timeNum){
-                clearTimeout(pet_timeNum);
+            if(this.pet_timeNum){
+                clearTimeout(this.pet_timeNum);
             }
         },
         pet_getEvent:function(){
