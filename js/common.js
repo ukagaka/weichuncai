@@ -503,13 +503,14 @@ function pet_init(){
                 if(data.error_code == 0 && data.result != null){
                     var ulHtml = '<ul>';
                     keyword = data.result;
-                    var textLeng = 5;
                     if(data.result.length > 5){
                         textLeng = 5;
+                    } else {
+                        textLeng = data.result.length;
                     }
                     for(var i =0;i< textLeng;i++){
                         ulHtml += '<p>'+keyword[i].des+'</p>';
-                    };
+                    }
                     ulHtml +='<ul>';
                     $('#pet_addinput').css('display','none');
                     $("#pet_tempsaying").html(ulHtml);
